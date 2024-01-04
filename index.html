@@ -13,9 +13,9 @@
     <div class="main">
         <div class="section-one">
             <div class="logo-bg">
-                <h1 class="logo">KiCookies</h1>
+                <h1 class="logo"><img class="logo-img" alt="logo" src="./images/logo.png" />KiCookies</h1>
             </div>
-            <p>Image by random</p>
+            <p class="credit">Photo by <u>Ellie Ellien</u> on <u>Unsplash</u></p>
         </div>
 
         <div class="section-two">
@@ -26,22 +26,22 @@
 
             <div class="middle">
                 <form>
-                    <div class="row">
+                    <div class="row first">
                         <div class="col">
-                           <label for="fname">FIRST NAME</label>
-                            <input type="text" id="fname" name="fname" /> 
+                           <label for="fname">FIRST NAME <span aria-label="required" class="asterik">*</span></label>
+                            <input type="text" id="fname" name="fname" placeholder="Jane" required/> 
                         </div>
                         
                         <div class="col">
-                            <label for="lname">LAST NAME</label>
-                            <input type="text" id="lname" name="lname" />
+                            <label for="lname">LAST NAME <span aria-label="required" class="asterik">*</span></label>
+                            <input type="text" id="lname" name="lname" placeholder="Smith" required/>
                         </div>    
                     </div>
 
                     <div class="row">
                         <div class="col">
-                            <label for="email">EMAIL</label>
-                            <input type="email" id="email" name="email" />
+                            <label for="email">EMAIL <span aria-label="required" class="asterik">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="@" required/>
                         </div>
                         <div class="col">
                             <label for="phone">PHONE NUMBER</label>
@@ -49,28 +49,55 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row last">
                         <div class="col">
-                            <label for="password">PASSWORD</label>
-                            <input type="password" id="password" name="password" />
+                            <label for="password">PASSWORD <span aria-label="required" class="asterik">*</span></label>
+                            <input type="password" id="password" name="password" required/>
+                            <p class="no-match" hidden>* Passwords do not match</p>
                         </div>    
                         <div class="col">
-                            <label for="confirm">CONFIRM PASSWORD</label>
-                            <input type="password" id="confirm" name="confirm" />
+                            <label for="confirm">CONFIRM PASSWORD <span aria-label="required" class="asterik">*</span></label>
+                            <input type="password" id="confirm" name="confirm" required/>
                         </div>    
                     </div>
                                         
             </div>
 
             <div class="bottom">
-                <button>Create Account</button>
+                <button id="createButton">Create Account</button>
                 </form>
                 <p>Already have an account? <span class="log">Log in</span></p>
-                
             </div>
-            <footer>Copyright @ zo.snow 2023</footer>
+            
         </div>
         
     </div>
+
+    <script>
+        const password = document.querySelector("#password");
+        const passConfirm = document.querySelector("#confirm");
+        const message = document.querySelector(".no-match");
+        const button = document.querySelector("#createButton");
+        button.addEventListener('click', (event) => {
+            if (password.value != passConfirm.value) {
+                
+                password.setCustomValidity("dummy value");
+                password.classList = "error";
+
+                passConfirm.setCustomValidity("dummy value");
+                passConfirm.classList = "error";
+
+                message.removeAttribute("hidden");
+                event.preventDefault();
+
+            } else if (password.value === passConfirm.value) {
+                password.setCustomValidity("");
+                passConfirm.setCustomValidity("");
+                passConfirm.classList = "";
+                password.classList = "";
+                message.setAttribute("hidden", "true");
+            }
+        })        
+    </script>
 </body>
 </html>
